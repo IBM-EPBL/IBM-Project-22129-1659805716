@@ -1,0 +1,62 @@
+Link for circuit diagram in TinkerCad: https://www.tinkercad.com/things/aVf0NAx7Ihz-fantastic-wluff/editel?sharecode=wp2cYgv-_IJ-yfSZ1GJvUi-_MLpSnEEVwmOILwUF37g
+
+
+
+Code for the design:
+
+int baselineTemp = 0;
+int celsius = 0;
+int fahrenheit = 0;
+int sensorState = 0;
+int buzzer = 3;
+int led = 10;
+
+void setup()
+{
+  pinMode(A0, INPUT);
+  pinMode(5,OUTPUT);
+  pinMode(3,OUTPUT);
+  pinMode(10,OUTPUT);
+  Serial.begin(9600);
+
+
+}
+
+void loop()
+{
+  sensorState = digitalRead(2);
+  
+  celsius = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125);
+  
+   fahrenheit = ((celsius * 9) / 5 + 32);
+  Serial.print(celsius);
+  Serial.print(" C, ");
+  Serial.print(fahrenheit);
+  Serial.println(" F");
+  if (sensorState == HIGH)
+  {
+ 
+
+   if (celsius < 24) {
+    digitalWrite(5, LOW);
+     digitalWrite(3,LOW);
+      digitalWrite(10,LOW);
+    Serial.print("The fan is off");
+   
+  }
+    else
+    {
+      digitalWrite(5,HIGH);
+      digitalWrite(3,HIGH);
+      digitalWrite(10,HIGH);
+      Serial.print("The fan is on");
+    }
+  }
+  else
+  {
+        ;
+  }
+  
+ 
+  delay(1000); 
+}
