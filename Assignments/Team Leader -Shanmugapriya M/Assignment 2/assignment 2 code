@@ -1,0 +1,19 @@
+import random
+list=[]
+b=int(input("Enter the no.of inputs: "))
+for i in range(0,b):
+    e=int(input())
+    list.append(e)
+print(list)
+t=random.choice(list)
+h=random.choice(list)
+print(t,h)
+if t>100:
+    if h>80:
+        print("MOST DANGEROUS")
+    else:
+        print("HIGH TEMPERATURE")
+elif t==100:
+    print("Care needed!! no risk")
+else:
+    print("All good")
