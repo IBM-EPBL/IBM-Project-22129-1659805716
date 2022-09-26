@@ -1,0 +1,19 @@
+import random
+reading=[]
+a=int(input("Enter the no.of inputs: "))
+for i in range(0,a):
+    e=int(input())
+    reading.append(e)
+print(reading)
+tem=random.choice(reading)
+hum=random.choice(reading)
+print(tem,hum)
+if tem>100:
+    if hum>80:
+        print("MOST DANGEROUS")
+    else:
+        print("HIGH TEMPERATURE")
+elif tem==100:
+    print("Care needed !! no risk")
+else:
+    print("All good")
