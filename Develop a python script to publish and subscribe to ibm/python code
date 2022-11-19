@@ -1,0 +1,36 @@
+import swiotp.sdk.device
+import time 
+import os 
+import datetime
+import rahdom
+myConfig = {
+    "identity": {
+        "orgId": "iu6pw5",
+        "typeId": "NodeMcu",
+        "deviceId": "98765"
+    },
+    "auth": {
+        "token": "12345678"
+    }
+}
+client =wiotp.sdk.device.Device.DeviceClient(config=myConfig, logHandlers=None)
+client.connect()
+
+def myCommandCallback(cmd):
+    print("Message received from IBM IoT Platform: %s" % cmd.data['command'])
+    m=cmd.data['command']
+    if(m=="Motoron"):
+        print("Motor is switched on")
+    elif(m=="motoroff"):
+        print("Motor is switched OFF")
+    print("")
+while True:
+    soil=random.randit(0,100)
+    temp=random.randint(-20,125)
+    hum=random.randint(0,100)
+    myData={'soil_moisture_level':soil, 'atmosphere_temperature':temp, 'humidity_level':hum}
+    client.publishEvent(eventId="Status",msgFormat="json",data=myData,qos=0, onPublish=None)
+    print("Data sent successfully:%s",myData)
+    time.sleep(5)
+    client.commandCallback = myCommandCallback
+client.disconnect()
